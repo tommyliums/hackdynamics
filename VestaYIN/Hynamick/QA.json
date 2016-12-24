@@ -1,57 +1,57 @@
 {
 	"PutUrl" : "qa_20161222",
-	" settings " : {
-		" number_of_shards " : 1,
-		" number_of_replicas " : 2
+	"settings" : {
+		"number_of_shards" : 1,
+		"number_of_replicas" : 2
 	},
-	" mappings " : {
-		" _default_ " : {
-			" properties " : {
-				" Q_chinese_s " : {
-					" type " : " string ",
-					" analyzer " : " smartcn ",
-					" fields " : {
-						" autocomplete " : {
-							" type " : " string ",
-							" analyzer " : " autocomplete "
+	"mappings" : {
+		"_default_" : {
+			"properties" : {
+				"Q_chinese_s" : {
+					"type" : "string",
+					"analyzer" : "smartcn",
+					"fields" : {
+						"autocomplete" : {
+							"type" : "string",
+							"analyzer" : "autocomplete"
 						}
 					}
 				},
-				" A_chinese_s " : {
-					" type " : " string ",
-					" analyzer " : " smartcn ",
-					" fields " : {
-						" autocomplete " : {
-							" type " : " string ",
-							" analyzer " : " autocomplete "
+				"A_chinese_s" : {
+					"type" : "string",
+					"analyzer" : "smartcn",
+					"fields" : {
+						"autocomplete" : {
+							"type" : "string",
+							"analyzer" : "autocomplete"
 						}
 					}
 				},
-				" Type " : {
-					" type " : " string ",
-					" fields " : {
-						" raw " : {
-							" type " : " string ",
-							" index " : " not_analyzed "
+				"Type" : {
+					"type" : "string",
+					"fields" : {
+						"raw" : {
+							"type" : "string",
+							"index" : "not_analyzed"
 						},
-						" lowercaseraw " : {
-							" type " : " string ",
-							" analyzer " : " lowercase_keyword "
+						"lowercaseraw" : {
+							"type" : "string",
+							"analyzer" : "lowercase_keyword"
 						}
 					}
 				},
-				" Url " : {
-					" type " : " string ",
-					" fields " : {
-						" lowercaseraw " : {
-							" type " : " string ",
-							" analyzer " : " lowercase_keyword "
+				"Url" : {
+					"type" : "string",
+					"fields" : {
+						"lowercaseraw" : {
+							"type" : "string",
+							"analyzer" : "lowercase_keyword"
 						}
 					}
 				},
-				" LastModified " : {
-					" type " : " date ",
-					" format " : " dateOptionalTime "
+				"LastModified" : {
+					"type" : "date",
+					"format" : "dateOptionalTime"
 				}
 			}
 		}
