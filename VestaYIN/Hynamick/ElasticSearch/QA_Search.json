@@ -1,5 +1,5 @@
 {
-    "PostUrl": "http://localhost:9200/qa/docs/_search/template",
+	"PostUrl" : "http://localhost:9200/qa/docs/_search/template",
 	"params" : {
 		"query_string" : "如何开通Azure服务",
 		"query_size" : 4

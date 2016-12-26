@@ -1,0 +1,23 @@
+{
+	"query" : "query_string",
+	"results" : [{
+			"question" : "Q1",
+			"answer" : "A1",
+			"type" : "T1",
+			"url" : "U1",
+			"lastModified" : "0001-01-01T00:00:00"
+		}, {
+			"question" : "Q1",
+			"answer" : "A1",
+			"type" : "T1",
+			"url" : "U1",
+			"lastModified" : "0001-01-01T00:00:00"
+		}, {
+			"question" : "Q1",
+			"answer" : "A1",
+			"type" : "T1",
+			"url" : "U1",
+			"lastModified" : "0001-01-01T00:00:00"
+		}
+	]
+}

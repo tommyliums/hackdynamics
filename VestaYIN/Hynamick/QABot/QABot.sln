@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QABot", "QABot\QABot.csproj", "{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAnswer", "SearchAnswer\SearchAnswer.csproj", "{64EEE748-1EE3-43C9-A59A-9B2093B3033C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAnswer.Tests", "SearchAnswer.Tests\SearchAnswer.Tests.csproj", "{3A0AD5AF-C374-4982-A57B-C79C123ECCF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64EEE748-1EE3-43C9-A59A-9B2093B3033C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64EEE748-1EE3-43C9-A59A-9B2093B3033C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64EEE748-1EE3-43C9-A59A-9B2093B3033C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64EEE748-1EE3-43C9-A59A-9B2093B3033C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A0AD5AF-C374-4982-A57B-C79C123ECCF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A0AD5AF-C374-4982-A57B-C79C123ECCF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A0AD5AF-C374-4982-A57B-C79C123ECCF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A0AD5AF-C374-4982-A57B-C79C123ECCF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

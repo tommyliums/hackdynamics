@@ -1,0 +1,38 @@
+{
+  "Query": null,
+  "TotalCount": 7,
+  "ResultCount": -1,
+  "ProcessElapse": -1,
+  "SearchElaspe": 0,
+  "Error": null,
+  "Results": [
+    {
+      "Question": "如何为我的 Azure 和 Office 365 订阅使用相同的组织 ID？",
+      "Answer": "如果希望为 Azure 订阅使用与 Office 365 相同的 OrgID，在 Office 365 已经成功开通，随后注册 Azure 的过程中，可在输入激活码后弹出的 OrgID 注册页面，无需重新填写注册信息，点击下图所示“登录”，用您访问 Office 365 服务的 OrgID 登录并完成后续步骤即可。",
+      "Type": "Subscription",
+      "Url": "http://ms-cloud.chinacloudsites.cn/wcp/message/details?replyId=477f9c22-091e-4b5e-816e-7bb6d23671af",
+      "LastModified": "2016-12-25T12:14:39"
+    },
+    {
+      "Question": "如何确保我使用 Azure 之后的数据和服务安全性？",
+      "Answer": "云服务的安全性和稳定性一直是业界关注的焦点。作为首个落地中国市场的国际公有云服务，由世纪互联运营的 Microsoft Azure 已经获得众多中国行业用户的认可，为广大用户带来可靠、灵活、高价值的公有云服务。<br>世纪互联运营的 Microsoft Azure 凭借在国内首先实现的 IaaS、PaaS、SaaS 三个层面的全方位云服务，以及可靠的本地化运营、国际品质有财务保障的月度服务级别协议、强大的数据安全保障、丰厚的客户收益等优势，获得了包括云份、云引擎（云服务）、全网负载均衡（Traffic Manager）等在内的共 6 项可信云认证，这是业界对世纪互联国际本土化云服务品质的认可。<br>再者，根据《GBT 22240-2008 信息安全技术信息系统安全等级保护定级指南》，公安部授权的测评机构依据《GB/T 22239-2008 信息安全技术信息系统安全等级保护基本要求》对由世纪互联运营的 Microsoft Azure 进行测评，信息安全保护等级评定为第三级 ( Information System Classified Security Protection (DJCP), Level 3 )，并且获得备案证明。<br>在完全符合中国政策和法规之下，中国地区的 Azure 数据服务提供分布在 2 个数据中心的（中国北部和中国东部）多达 6 个异地备份，再加上提供给企业客户在线服务方面的数十年的经验应用于 Azure 平台，我们将努力在安全性、隐私与管控和合规性实践方面保持业界领先地位。<br>想了解更多详情，请参阅 Azure 信任中心的数据安全，隐私及常见问题页面。 ",
+      "Type": "General",
+      "Url": "http://ms-cloud.chinacloudsites.cn/wcp/message/details?replyId=6fbecf62-ed64-4952-a674-79d248cee03b",
+      "LastModified": "2016-12-25T12:14:33"
+    },
+    {
+      "Question": "如何确保我使用 Azure 之后的数据和服务安全性？",
+      "Answer": "云服务的安全性和稳定性一直是业界关注的焦点。作为首个落地中国市场的国际公有云服务，由世纪互联运营的 Microsoft Azure 已经获得众多中国行业用户的认可，为广大用户带来可靠、灵活、高价值的公有云服务。<br>世纪互联运营的 Microsoft Azure 凭借在国内首先实现的 IaaS、PaaS、SaaS 三个层面的全方位云服务，以及可靠的本地化运营、国际品质有财务保障的月度服务级别协议、强大的数据安全保障、丰厚的客户收益等优势，获得了包括云份、云引擎（云服务）、全网负载均衡（Traffic Manager）等在内的共 6 项可信云认证，这是业界对世纪互联国际本土化云服务品质的认可。<br>再者，根据《GBT 22240-2008 信息安全技术信息系统安全等级保护定级指南》，公安部授权的测评机构依据《GB/T 22239-2008 信息安全技术信息系统安全等级保护基本要求》对由世纪互联运营的 Microsoft Azure 进行测评，信息安全保护等级评定为第三级 ( Information System Classified Security Protection (DJCP), Level 3 )，并且获得备案证明。 <br>在完全符合中国政策和法规之下，中国地区的 Azure 数据服务提供分布在 2 个数据中心的（中国北部和中国东部）多达 6 个异地备份，再加上提供给企业客户在线服务方面的数十年的经验应用于 Azure 平台，我们将努力在安全性、隐私与管控和合规性实践方面保持业界领先地位。<br>想了解更多详情，请参阅 Azure 信任中心的数据安全，隐私及常见问题页面。 ",
+      "Type": "Subscription",
+      "Url": "http://ms-cloud.chinacloudsites.cn/wcp/message/details?replyId=6fbecf62-ed64-4952-a674-79d248cee03b",
+      "LastModified": "2016-12-25T12:14:41"
+    },
+    {
+      "Question": "如果 Azure 中的部署出现问题，如何确定问题源自我自己的部署，或者 Azure 服务暂时故障？",
+      "Answer": "秉承“透明”原则，世纪互联运营的 Microsoft Azure 会通过 Azure 服务状态报告页面向用户告知所有 Azure 服务的运行状况，通过该页面即可了解不同地区各种 Azure 服务的当前和历史状况信息。如果某一服务确实遇到了问题，该页面上会有相应的描述。您可以通过这些信息确定故障是否是由 Azure 服务本身引起的。Azure 服务状态报告页面网址：https://www.azure.cn/support/service-dashboard/",
+      "Type": "Fees",
+      "Url": "http://ms-cloud.chinacloudsites.cn/wcp/message/details?replyId=ca87f18b-055b-432b-ac20-a0307deea979",
+      "LastModified": "2016-12-25T12:14:45"
+    }
+  ]
+}
