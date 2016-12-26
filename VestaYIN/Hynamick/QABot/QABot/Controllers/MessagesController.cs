@@ -11,6 +11,8 @@ using Microsoft.Bot.Builder.Dialogs;
 using Hynamick.SearchAnswer;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.Bot.Builder.Dialogs.Internals;
+using Autofac;
 
 namespace Hynamick.QaBot
 {
@@ -25,15 +27,55 @@ namespace Hynamick.QaBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                ////ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                ////// calculate something for us to return
-                ////int length = (activity.Text ?? string.Empty).Length;
+                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                var query = activity.Text;
 
-                ////// return our reply to the user
-                ////Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
-                ////await connector.Conversations.ReplyToActivityAsync(reply);
-                await Conversation.SendAsync(activity, () => new QaDialog());
+                StateClient stateClient = activity.GetStateClient();
+                BotData userData = await stateClient.BotState.GetUserDataAsync(activity.ChannelId, activity.From.Id);
+                var actions = userData.GetProperty<IDictionary<string, string>>("RelatedQuestions");
 
+                if (actions != null && actions.ContainsKey(query))
+                {
+                    query = actions[query];
+                }
+
+                var searchResponse = await QaDialog.Handler.SearchAsync(query, QaDialog.DefaultAnswerCount);
+                var responseText = QaDialog.BuildText(query, searchResponse, out actions);
+
+                userData.SetProperty<IDictionary<string, string>>("RelatedQuestions", actions);
+                await stateClient.BotState.SetUserDataAsync(activity.ChannelId, activity.From.Id, userData);
+
+                // return our reply to the user
+                Activity reply = activity.CreateReply(responseText, "zh-cn");
+
+                await connector.Conversations.ReplyToActivityAsync(reply);
+                ////await Conversation.SendAsync(activity, () => new QaDialog());
+
+            }
+            if (activity.Type == ActivityTypes.ConversationUpdate)
+            {
+                IConversationUpdateActivity update = activity;
+                using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+                {
+                    var client = scope.Resolve<IConnectorClient>();
+                    if (update.MembersAdded.Any())
+                    {
+                        var reply = activity.CreateReply();
+                        foreach (var newMember in update.MembersAdded)
+                        {
+                            if (newMember.Id != activity.Recipient.Id)
+                            {
+                                reply.Text = $"请问您有什么需要帮助的，{newMember.Name}？";
+                            }
+                            else
+                            {
+                                reply.Text = $"需要帮忙么，{activity.From.Name}？";
+                            }
+                            reply.Locale = "zh-cn";
+                            await client.Conversations.ReplyToActivityAsync(reply);
+                        }
+                    }
+                }
             }
             else
             {
@@ -49,12 +91,6 @@ namespace Hynamick.QaBot
             {
                 // Implement user deletion here
                 // If we handle user deletion, return a real message
-            }
-            else if (message.Type == ActivityTypes.ConversationUpdate)
-            {
-                // Handle conversation state changes, like members being added and removed
-                // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
-                // Not available in all channels
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {

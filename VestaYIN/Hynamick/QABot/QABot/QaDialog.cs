@@ -12,11 +12,12 @@ using Hynamick.SearchAnswer;
 namespace Hynamick.QaBot
 {
     [Serializable]
-    public class QaDialog : IDialog<string>
+    public class QaDialog : IDialog<object>
     {
-        private static readonly SearchAnswer.SearchHandler handler = new SearchAnswer.SearchHandler();
+        public static readonly SearchAnswer.SearchHandler Handler = new SearchAnswer.SearchHandler();
 
-        private static readonly int DefaultAnswerCount = int.Parse(ConfigurationManager.AppSettings["DefaultAnswerCount"]);
+        public static readonly int DefaultAnswerCount = int.Parse(ConfigurationManager.AppSettings["DefaultAnswerCount"]);
+
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -27,14 +28,29 @@ namespace Hynamick.QaBot
         {
             var message = await argument;
             var queryString = this.ParseQuestion(message.Text);
-            var resultEntities = await handler.SearchAsync(queryString, DefaultAnswerCount);
-            string answerText = this.BuildAnswer(resultEntities);
-            await context.PostAsync(answerText);
+            var resultEntities = await Handler.SearchAsync(queryString, DefaultAnswerCount);
+            IDictionary<string, string> actions;
+            string answerText = BuildText(queryString, resultEntities, out actions);
+
+            await context.PostAsync(answerText, "zh-cn");
             context.Wait(MessageReceivedAsync);
         }
 
-        private string BuildAnswer(SearchResponse resultEntities)
+        public static Dictionary<string, string> BuildActions(SearchResponse resultEntities)
         {
+            if (resultEntities.Error != null || resultEntities.Results == null || resultEntities.Results.Count <= 1)
+            {
+                return null;
+            }
+
+            var actions = new Dictionary<string, string>();
+
+            return actions;
+        }
+
+        public static string BuildText(string query, SearchResponse resultEntities, out IDictionary<string, string> actions)
+        {
+            actions = new Dictionary<string, string>();
             if (resultEntities.Error != null)
             {
                 return $"出现点儿问题{resultEntities.Error.Code}。Details: {resultEntities.Error.Message}";
@@ -42,19 +58,20 @@ namespace Hynamick.QaBot
 
             if (resultEntities.Results == null || resultEntities.Results.Count == 0)
             {
-                return "没有找到合适的答案，请换其他问题试试！";
+                return "没有找到合适的答案，问其它东西试试！";
             }
 
             var builder = new StringBuilder();
-            builder.Append("找到的问题：<br>");
-            builder.Append(resultEntities.Results[0].Question).Append("<br>");
-            builder.Append(resultEntities.Results[0].Answer).Append("<br>");
-            if (resultEntities.Results.Count > 1)
+            builder.Append($"**关于*{query}*的建议答案**: <br>");
+            builder.Append($"**问题**：{resultEntities.Results[0].Question}<br>**答案**：{resultEntities.Results[0].Answer}");
+
+            if (resultEntities.ResultCount > 1)
             {
-                builder.Append("<br><br>您可能感兴趣：<br>");
-                for (var index = 1; index < resultEntities.Results.Count; index++)
+                builder.Append("<br>**其它相关**:<br>");
+                for (var index = 1; index < resultEntities.ResultCount; index++)
                 {
-                    builder.Append($"{resultEntities.Results[index].Question}<br>");
+                    builder.Append($"{index}. {resultEntities.Results[index].Question}<br>");
+                    actions[index.ToString()] = resultEntities.Results[index].Question;
                 }
             }
 
