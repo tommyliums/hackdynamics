@@ -1,0 +1,1 @@
+﻿Allow: http://consumer.huawei.com/cn/support/.*
