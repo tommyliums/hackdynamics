@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common\Common.csproj">
+      <Project>{15F34E69-85BB-4A17-8A72-E498218EDAE1}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CrawlContract\CrawlContract.csproj">
       <Project>{D62365D6-B91C-438B-B53A-C52933AD83BC}</Project>
       <Name>CrawlContract</Name>
