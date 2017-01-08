@@ -16,6 +16,26 @@ namespace Common.Html2Markdown
         {
             new PatternReplacer
             {
+                Pattern = @"(\r\n)+\s*<p[^>]*>",
+                Replacement = @"\r\n"
+            },
+            new PatternReplacer
+            {
+                Pattern = @"</p[^>]*>\s*(\r\n)+",
+                Replacement = @"\r\n"
+            },
+            new PatternReplacer
+            {
+                Pattern = @"\s*<p[^>]*>",
+                Replacement = @"\r\n"
+            },
+            new PatternReplacer
+            {
+                Pattern = @"</p[^>]*>s\*",
+                Replacement = @"\r\n"
+            },
+            new PatternReplacer
+            {
                 Pattern = @"<style[^>]*>.*?</style>",
                 Replacement = ""
             },

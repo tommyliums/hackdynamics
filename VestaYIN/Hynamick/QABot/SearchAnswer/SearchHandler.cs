@@ -1,12 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Hynamick.SearchAnswer
 {
@@ -15,9 +12,7 @@ namespace Hynamick.SearchAnswer
         public static readonly string SearchUrl = ConfigurationManager.AppSettings["SearchUrl"];
 
         public static readonly string SearchTemplate = LoadSearchTemplate();
-
-        public static readonly HttpClient client = InitializeHttpClient();
-
+        public static readonly HttpClient Client = InitializeHttpClient();
         public static readonly JsonTransform Transform = InitializeJsonTransform();
 
         private static JsonTransform InitializeJsonTransform()
@@ -41,12 +36,12 @@ namespace Hynamick.SearchAnswer
 
         public async Task<SearchResponse> SearchAsync(string query, int count)
         {
-            var searchQuery = this.BuildSearchQuery(query, count);
+            var searchQuery = BuildSearchQuery(query, count);
             SearchResponse response;
             try
             {
-                var responseMessage = await this.GetResponseMessage(searchQuery);
-                response = this.ParseResponse(responseMessage);
+                var responseMessage = await GetResponseMessage(searchQuery);
+                response = ParseResponse(responseMessage);
             }
             catch (Exception ex)
             {
@@ -94,7 +89,7 @@ namespace Hynamick.SearchAnswer
                 }
             }
 
-            var response = await client.SendAsync(requestMessage);
+            var response = await Client.SendAsync(requestMessage);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }

@@ -20,7 +20,7 @@
                   "multi_match": {
                     "query": "{{query_string}}",
                     "type": "cross_fields",
-                    "fields": [ "Q_chinese_s", "A_chinese_s", "Type", "Url" ],
+                    "fields": [ "Q_chinese_s", "A_chinese_s", "Type", "Url", "Keyword" ],
                     "minimum_should_match": "2<80% 4<70% 9<50%"
                   }
                 },

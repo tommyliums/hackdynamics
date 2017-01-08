@@ -15,15 +15,25 @@ namespace CrawlerManager
     {
         static void Main(string[] args)
         {
-            testc();
-            return;
+            HwFaqPostData();
+        }
 
+        private static void HwFaqPostData()
+        {
+            const string dataFolder = @"D:\Git\zh_cn";
+            var poster = new HwFaqDataPoster();
+            var docCount = poster.ProcessDataAsync(dataFolder).Result;
+            Console.WriteLine(docCount);
+        }
+
+        private static void HwFaqCrawl()
+        {
             var manager = new HwFaqManager();
             var successCount = manager.CrawlItems().Result;
             Console.WriteLine(successCount);
         }
 
-        private static void testc()
+        private static void HwFaqHtmlAnswer2MarkDown()
         {
             var converter = new Converter();
 

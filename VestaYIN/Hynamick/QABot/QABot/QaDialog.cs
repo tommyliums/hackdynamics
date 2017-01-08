@@ -14,10 +14,12 @@ namespace Hynamick.QaBot
     [Serializable]
     public class QaDialog : IDialog<object>
     {
-        public static readonly SearchAnswer.SearchHandler Handler = new SearchAnswer.SearchHandler();
+        public static readonly SearchHandler Handler = new SearchHandler();
+
+        public static readonly int DefaultAnswerLength =
+            int.Parse(ConfigurationManager.AppSettings["DefaultAnswerLength"]);
 
         public static readonly int DefaultAnswerCount = int.Parse(ConfigurationManager.AppSettings["DefaultAnswerCount"]);
-
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -63,14 +65,20 @@ namespace Hynamick.QaBot
 
             var builder = new StringBuilder();
             builder.Append($"**关于*{query}*的建议答案**: <br>");
-            builder.Append($"**问题**：{resultEntities.Results[0].Question}<br>**答案**：{resultEntities.Results[0].Answer}");
+            var answer = resultEntities.Results[0].Answer;
+            if (answer.Length > DefaultAnswerLength)
+            {
+                answer = $"{answer.Substring(0, DefaultAnswerLength)}...   ([详情]({resultEntities.Results[0].Url}))";
+            }
+
+            builder.Append($"**问题**：[{resultEntities.Results[0].Question}]({resultEntities.Results[0].Url})<br>**答案**：{answer}<br>");
 
             if (resultEntities.ResultCount > 1)
             {
                 builder.Append("<br>**其它相关**:<br>");
                 for (var index = 1; index < resultEntities.ResultCount; index++)
                 {
-                    builder.Append($"{index}. {resultEntities.Results[index].Question}<br>");
+                    builder.Append($"{index}. [{resultEntities.Results[index].Question}]({resultEntities.Results[index].Url})<br>");
                     actions[index.ToString()] = resultEntities.Results[index].Question;
                 }
             }
