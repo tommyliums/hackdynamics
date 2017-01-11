@@ -1,0 +1,6 @@
+﻿{
+  "ServiceUrl": "http://hynamick-es.chinacloudapp.cn:9200/hwfaq/docs/_search/template",
+  "SearchTemplatePath": ".\\Configurations\\SearchHandler\\SearchRequestTemplate.json",
+  "SearchTransformFilePath": ".\\Configurations\\JsonTransform\\SearchResponse.txt"
+
+}

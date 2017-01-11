@@ -1,0 +1,80 @@
+﻿@source{
+  "Query": null,
+  "TotalCount": #{
+        "Type": "SingleIntValue",
+        "Select": "$.hits.total"
+      },
+  "ResultCount": -1,
+  "ProcessElapse": -1,
+  "SearchElaspe": #{
+        "Type": "SingleLongValue",
+        "Select": "$.took"
+      },
+  "MaxScore": #{
+        "Type": "SingleFloatValue",
+        "Select": "$.hits.max_score"
+      },
+  "Results": [#{
+               "Type":"ApplyTemplate",
+               "TemplateName":"ResultTemplate",
+               "Select":"$.hits.hits[*]"
+       }
+     ],
+  #{
+        "Type":"ApplyTemplate",
+        "TemplateName":"ErrorTemplate",
+        "Select":"$.error"
+       }
+}
+
+@template{
+    "Name": "ErrorTemplate",
+    "Content": '"Error": {
+        "Code": 30001,
+        "Message": "Type: #{
+        "Type": "SingleStringValue",
+        "Select": "$.type",
+        "NoQuote": true
+      }, Message:  #{
+        "Type": "SingleStringValue",
+        "Select": "$.reason",
+        "NoQuote": true
+      }"
+    }'
+}
+
+@template{
+    "Name": "ResultTemplate",
+    "Content": '{
+      "Question": #{
+        "Type": "SingleStringValue",
+        "Select": "$._source.Q_chinese_s"
+      },
+      "Answer": #{
+        "Type": "SingleStringValue",
+        "Select": "$._source.A_chinese_s"
+      },
+      "Url": #{
+        "Type": "SingleStringValue",
+        "Select": "$._source.Url"
+      },
+      "Type": #{
+        "Type": "SingleStringValue",
+        "Select": "$._source.Type"
+      },
+	  "Metas": {
+		  "Id": #{
+			"Type": "SingleStringValue",
+			"Select": "$._id"
+		  },
+		  "Score": #{
+			"Type": "SingleStringValue",
+			"Select": "$._score"
+		  },
+		  "LastModified": #{
+			"Type": "SingleDateValue",
+			"Select": "$._source.LastModified"
+		  }
+	   }
+    }'
+}

@@ -1,22 +1,21 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SearchResult.cs" company="Microsoft">
+// <copyright file="SearchRequest.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 // <summary>
-//    Defines the SearchResult.cs type.
+//    Defines the SearchRequest.cs type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Hynamick.SearchAnswer
+namespace Hynamick.Search.SearchAnswer
 {
-    using System;
+    using System.Collections.Generic;
 
-    public class SearchResult
+    public class SearchRequest
     {
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        public string Type { get; set; }
         public string Url { get; set; }
-        public DateTime LastModified { get; set; }
+        public string Body { get; set; }
+        public string Method { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
     }
 }

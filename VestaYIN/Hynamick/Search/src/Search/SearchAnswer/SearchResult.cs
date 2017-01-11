@@ -7,9 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Hynamick.SearchAnswer
+namespace Hynamick.Search.SearchAnswer
 {
-    using System;
+    using System.Collections.Generic;
 
     public class SearchResult
     {
@@ -17,6 +17,6 @@ namespace Hynamick.SearchAnswer
         public string Answer { get; set; }
         public string Type { get; set; }
         public string Url { get; set; }
-        public DateTime LastModified { get; set; }
+        public Dictionary<string, string> Metas;
     }
 }

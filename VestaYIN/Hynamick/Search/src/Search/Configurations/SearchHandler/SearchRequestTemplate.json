@@ -1,0 +1,71 @@
+﻿{
+  "params": {
+    "query_string": "##query_string##",
+    "query_size": "##result_count##"
+  },
+  "inline": {
+    "from": 0,
+    "size": "{{query_size}}",
+    "query": {
+      "bool": {
+        "must": {
+          "function_score": {
+            "score_mode": "sum",
+            "functions": [
+            ],
+            "boost_mode": "sum",
+            "query": {
+              "bool": {
+                "must": {
+                  "multi_match": {
+                    "query": "{{query_string}}",
+                    "type": "cross_fields",
+                    "fields": [ "Q_chinese_s", "A_chinese_s", "Type", "Url", "Keyword" ],
+                    "minimum_should_match": "2<80% 4<70% 9<50%"
+                  }
+                },
+
+                "should": [
+                  {
+                    "match": {
+                      "Q_chinese_s": {
+                        "query": "{{query_string}}",
+                        "boost": 10
+                      }
+                    }
+                  },
+                  {
+                    "match": {
+                      "A_chinese_s": {
+                        "query": "{{query_string}}",
+                        "boost": 3
+                      }
+                    }
+                  },
+                  {
+                    "match_phrase": {
+                      "Q_chinese_s": {
+                        "query": "{{query_string}}",
+                        "slop": 2,
+                        "boost": 20
+                      }
+                    }
+                  },
+                  {
+                    "match_phrase": {
+                      "A_chinese_s": {
+                        "query": "{{query_string}}",
+                        "slop": 3,
+                        "boost": 5
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

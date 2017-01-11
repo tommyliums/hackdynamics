@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Hynamick.SearchAnswer
+namespace SearchAnswer.Core
 {
     using System;
 
