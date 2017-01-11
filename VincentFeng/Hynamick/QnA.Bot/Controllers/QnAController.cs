@@ -45,6 +45,11 @@ namespace Hynamick.QnA.Bot.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new ArgumentNullException("activity"));
             }
 
+            if (activity.Type != ActivityTypes.Message)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, activity.Type.ToString());
+            }
+
             if (string.IsNullOrWhiteSpace(activity.Text))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new ArgumentNullException("activity.Text"));
