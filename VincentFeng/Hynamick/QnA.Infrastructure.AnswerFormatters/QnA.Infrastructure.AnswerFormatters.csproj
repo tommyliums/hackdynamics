@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BE1DEF07-CBE0-4CD3-9BA0-D4BF4A7ECF58}</ProjectGuid>
+    <ProjectGuid>{BF7AB0A7-A32F-4311-8CED-5CB349E72F25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hynamick.QnA.Infrastructure.Mock</RootNamespace>
-    <AssemblyName>Hynamick.QnA.Infrastructure.Mock</AssemblyName>
+    <RootNamespace>Hynamick.QnA.Infrastructure.AnswerFormatters</RootNamespace>
+    <AssemblyName>Hynamick.QnA.Infrastructure.AnswerFormatters</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MockQnAProvider.cs" />
+    <Compile Include="SimpleAnswerFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

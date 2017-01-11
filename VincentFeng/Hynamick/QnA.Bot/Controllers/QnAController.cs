@@ -1,15 +1,15 @@
 ﻿using Hynamick.QnA.Core.DomainModels;
 using Hynamick.QnA.Core.Interfaces;
-using Hynamick.QnA.Infrastructure.Mock;
+using Hynamick.QnA.Infrastructure.AnswerFormatters;
+using Hynamick.QnA.Infrastructure.QnAMaker;
+using Hynamick.QnA.Infrastructure.QnAMaker.Models;
 using Microsoft.Bot.Connector;
 using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Hynamick.QnA.Infrastructure.QnAMaker;
-using Hynamick.QnA.Infrastructure.QnAMaker.Models;
-using System.Configuration;
 
 namespace Hynamick.QnA.Bot.Controllers
 {
@@ -33,7 +33,7 @@ namespace Hynamick.QnA.Bot.Controllers
             };
 
             this.qnaProvider = new QnAProviderQnAMakerImpl(qnaMakerEnvInfo);
-            this.answerFormatter = new MockAnswerFormatter();
+            this.answerFormatter = new SimpleAnswerFormatter();
         }
 
         [Route("")]
@@ -43,6 +43,11 @@ namespace Hynamick.QnA.Bot.Controllers
             if (activity == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new ArgumentNullException("activity"));
+            }
+
+            if (activity.Type != ActivityTypes.Message)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, activity.Type.ToString());
             }
 
             if (string.IsNullOrWhiteSpace(activity.Text))
