@@ -7,5 +7,11 @@
             get;
             set;
         }
+
+        public double Relevance
+        {
+            get;
+            set;
+        }
     }
 }

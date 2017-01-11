@@ -28,7 +28,8 @@ namespace Hynamick.QnA.Infrastructure.QnAMaker
 
             return new Answer()
             {
-                Text = qnaAnswer.Answer
+                Text = qnaAnswer.Answer,
+                Relevance = qnaAnswer.Score
             };
         }
 

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Hynamick.QnA.Infrastructure.QnAMaker")]
+[assembly: AssemblyTitle("Hynamick.QnA.Infrastructure.AnswerFormatter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Hynamick.QnA.Infrastructure.QnAMaker")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyProduct("Hynamick.QnA.Infrastructure.AnswerFormatters")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("445a886f-3696-4cb5-8328-041dc3dad842")]
+[assembly: Guid("bf7ab0a7-a32f-4311-8ced-5cb349e72f25")]
 
 // Version information for an assembly consists of the following four values:
 //

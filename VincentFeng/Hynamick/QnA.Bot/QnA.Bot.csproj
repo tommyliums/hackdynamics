@@ -140,9 +140,9 @@
       <Project>{e92bef6e-192b-47e9-80f1-28a12a163dcd}</Project>
       <Name>QnA.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\QnA.Infrastructure.Mock\QnA.Infrastructure.Mock.csproj">
-      <Project>{be1def07-cbe0-4cd3-9ba0-d4bf4a7ecf58}</Project>
-      <Name>QnA.Infrastructure.Mock</Name>
+    <ProjectReference Include="..\QnA.Infrastructure.AnswerFormatters\QnA.Infrastructure.AnswerFormatters.csproj">
+      <Project>{bf7ab0a7-a32f-4311-8ced-5cb349e72f25}</Project>
+      <Name>QnA.Infrastructure.AnswerFormatters</Name>
     </ProjectReference>
     <ProjectReference Include="..\QnA.Infrastructure.QnAMaker\QnA.Infrastructure.QnAMaker.csproj">
       <Project>{445a886f-3696-4cb5-8328-041dc3dad842}</Project>
