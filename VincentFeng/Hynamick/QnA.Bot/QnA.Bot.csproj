@@ -113,6 +113,7 @@
   <ItemGroup>
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
+    <Content Include="Privacy.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
