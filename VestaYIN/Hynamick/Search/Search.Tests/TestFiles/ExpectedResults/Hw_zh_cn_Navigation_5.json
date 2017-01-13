@@ -1,0 +1,66 @@
+﻿{
+  "query": "导航",
+  "totalCount": 269,
+  "resultCount": 5,
+  "processElapse": 576,
+  "searchElaspe": 1,
+  "maxScore": 396.202545,
+  "error": null,
+  "results": [
+    {
+      "metas": {
+        "Id": "19398",
+        "Score": "396.20255",
+        "LastModified": "2015-01-30T08:57:07"
+      },
+      "question": "如何使用手机导航？",
+      "answer": " 手机已内置 GPS 接收器，只要安装导航软件后，就能使用手机来导航。若没有预置导航软件，建议登陆手机应用市场下载所需的导航软件。 \r\n\r\n 使用手机导航时，先开启 GPS 开关，然后打开导航软件，根据界面提示进行地图浏览和线路规划。 \r\n\n\n\n\n",
+      "type": "位置服务与导航",
+      "url": "http://consumer.huawei.com/cn/support/faqs/detail/index.htm?id=19398"
+    },
+    {
+      "metas": {
+        "Id": "44509",
+        "Score": "396.20255",
+        "LastModified": "2015-09-16T10:53:39"
+      },
+      "question": "如何使用手机导航？",
+      "answer": " 手机已内置 GPS 接收器，只要安装导航软件，就能使用手机来导航。若没有预置导航软件，建议前往手机应用市场下载导航软件。 \r\n\r\n 使用手机导航时，先开启 GPS，然后打开导航软件，根据界面提示进行地图浏览和线路规划。 \r\n\n\n\n\n",
+      "type": "位置服务与导航",
+      "url": "http://consumer.huawei.com/cn/support/faqs/detail/index.htm?id=44509"
+    },
+    {
+      "metas": {
+        "Id": "33121",
+        "Score": "393.6157",
+        "LastModified": "2015-07-13T00:48:24"
+      },
+      "question": "如何使用手机导航？",
+      "answer": " 手机已内置 GPS 接收器，只要安装导航软件，就能使用手机来导航。若没有预置导航软件，建议前往手机应用市场下载导航软件。 \r\n\r\n 使用手机导航时，先开启 GPS，然后打开导航软件，根据界面提示进行地图浏览和线路规划。 \r\n\n\n\n\n",
+      "type": "位置服务与导航",
+      "url": "http://consumer.huawei.com/cn/support/faqs/detail/index.htm?id=33121"
+    },
+    {
+      "metas": {
+        "Id": "33122",
+        "Score": "386.2871",
+        "LastModified": "2015-07-13T00:48:24"
+      },
+      "question": "如何使用离线地图导航？",
+      "answer": " 打开地图导航软件，下载需要离线使用的地图包。下载时建议关闭数据流量，使用 WLAN 。完成下载后，就可以离线导航。离线导航时可以不用连接数据业务，但是需要打开 GPS 开关，并且手机处于 GPS 卫星信号较好的环境下，如室外无楼宇遮挡。 \r\n\r\n 不同导航软件的功能不一样，建议前往应用市场下载支持离线导航的软件，比如百度地图、高德地图等。 \r\n\n\n\n\n",
+      "type": "位置服务与导航",
+      "url": "http://consumer.huawei.com/cn/support/faqs/detail/index.htm?id=33122"
+    },
+    {
+      "metas": {
+        "Id": "44510",
+        "Score": "386.2871",
+        "LastModified": "2015-09-16T10:53:39"
+      },
+      "question": "如何使用离线地图导航？",
+      "answer": " 打开地图导航软件，下载需要离线使用的地图包。下载时建议关闭数据流量，使用 WLAN 。完成下载后，就可以离线导航。离线导航时可以不用连接数据业务，但是需要打开 GPS 开关，并且手机处于 GPS 卫星信号较好的环境下，如室外无楼宇遮挡。 \r\n\r\n 不同导航软件的功能不一样，建议前往应用市场下载支持离线导航的软件，比如百度地图、高德地图等。 \r\n\n\n\n\n",
+      "type": "位置服务与导航",
+      "url": "http://consumer.huawei.com/cn/support/faqs/detail/index.htm?id=44510"
+    }
+  ]
+}
