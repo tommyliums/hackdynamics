@@ -1,0 +1,3 @@
+﻿zh-cn	chinese_s
+zh-tw	chinese_t
+en-us	english

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="HwFaqDataPoster.cs" />
     <Compile Include="HwFaqManager.cs" />
+    <Compile Include="LocaleHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +69,11 @@
       <Project>{D62365D6-B91C-438B-B53A-C52933AD83BC}</Project>
       <Name>CrawlContract</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LocaleMapping.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

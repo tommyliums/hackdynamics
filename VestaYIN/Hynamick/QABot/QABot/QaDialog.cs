@@ -1,20 +1,45 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
-using Microsoft.Bot.Connector;
-using System.Configuration;
-using System.Text;
-using Hynamick.SearchAnswer;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="QaDialog.cs" company="Microsoft">
+//     Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+// <summary>
+//     Defines the QaDialog.cs type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Hynamick.QaBot
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.IO;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using Hynamick.Search.SearchAnswer;
+
+    using Microsoft.Azure;
+    using Microsoft.Bot.Builder.Dialogs;
+    using Microsoft.Bot.Connector;
+
     [Serializable]
     public class QaDialog : IDialog<object>
     {
-        public static readonly SearchHandler Handler = new SearchHandler();
+        public static readonly SearchHandler Handler = InitializeSearchHandler();
+
+        private static SearchHandler InitializeSearchHandler()
+        {
+            var Client = new HttpClient();
+            var ServiceUrl = CloudConfigurationManager.GetSetting("SearchUrl");
+            var localeMappingPath = Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath,
+               CloudConfigurationManager.GetSetting("LocaleMappingPath"));
+            var SearchTemplatePath = Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath,
+                CloudConfigurationManager.GetSetting("SearchTemplateFile"));
+            var TransformFilePath = Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath,
+                CloudConfigurationManager.GetSetting("TransformFilePath"));
+            return new SearchHandler(Client, ServiceUrl, localeMappingPath, SearchTemplatePath, TransformFilePath);
+        }
 
         public static readonly int DefaultAnswerLength =
             int.Parse(ConfigurationManager.AppSettings["DefaultAnswerLength"]);
@@ -23,19 +48,19 @@ namespace Hynamick.QaBot
 
         public async Task StartAsync(IDialogContext context)
         {
-            context.Wait(MessageReceivedAsync);
+            context.Wait(this.MessageReceivedAsync);
         }
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var message = await argument;
             var queryString = this.ParseQuestion(message.Text);
-            var resultEntities = await Handler.SearchAsync(queryString, DefaultAnswerCount);
+            var resultEntities = await Handler.SearchAsync("HW", "zh-cn", queryString, DefaultAnswerCount);
             IDictionary<string, string> actions;
-            string answerText = BuildText(queryString, resultEntities, out actions);
+            var answerText = BuildText(queryString, resultEntities, out actions);
 
             await context.PostAsync(answerText, "zh-cn");
-            context.Wait(MessageReceivedAsync);
+            context.Wait(this.MessageReceivedAsync);
         }
 
         public static Dictionary<string, string> BuildActions(SearchResponse resultEntities)
@@ -50,7 +75,8 @@ namespace Hynamick.QaBot
             return actions;
         }
 
-        public static string BuildText(string query, SearchResponse resultEntities, out IDictionary<string, string> actions)
+        public static string BuildText(string query, SearchResponse resultEntities,
+            out IDictionary<string, string> actions)
         {
             actions = new Dictionary<string, string>();
             if (resultEntities.Error != null)
@@ -71,14 +97,16 @@ namespace Hynamick.QaBot
                 answer = $"{answer.Substring(0, DefaultAnswerLength)}...   ([详情]({resultEntities.Results[0].Url}))";
             }
 
-            builder.Append($"**问题**：[{resultEntities.Results[0].Question}]({resultEntities.Results[0].Url})<br>**答案**：{answer}<br>");
+            builder.Append(
+                $"**问题**：[{resultEntities.Results[0].Question}]({resultEntities.Results[0].Url})<br>**答案**：{answer}<br>");
 
             if (resultEntities.ResultCount > 1)
             {
                 builder.Append("<br>**其它相关**:<br>");
                 for (var index = 1; index < resultEntities.ResultCount; index++)
                 {
-                    builder.Append($"{index}. [{resultEntities.Results[index].Question}]({resultEntities.Results[index].Url})<br>");
+                    builder.Append(
+                        $"{index}. [{resultEntities.Results[index].Question}]({resultEntities.Results[index].Url})<br>");
                     actions[index.ToString()] = resultEntities.Results[index].Question;
                 }
             }

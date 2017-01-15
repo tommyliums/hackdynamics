@@ -1,5 +1,5 @@
 {
-	"PutUrl" : "hwqna",
+	"PutUrl" : "hwfaq",
 	"settings" : {
 		"number_of_shards" : 1,
 		"number_of_replicas" : 2
@@ -12,59 +12,57 @@
 				},
 				"Q_chinese_s" : {
 					"type" : "string",
-					"analyzer" : "smartcn",
-					"fields" : {
-						"autocomplete" : {
-							"type" : "string",
-							"analyzer" : "autocomplete"
-						}
-					}
+					"analyzer" : "smartcn"
 				},
-				"A_chinese_s" : {
-					"type" : "string",
-					"analyzer" : "smartcn",
-					"fields" : {
-						"autocomplete" : {
-							"type" : "string",
-							"analyzer" : "autocomplete"
-						}
-					}
-				},
-				"Type" : {
-					"type" : "string",
-					"analyzer" : "smartcn",
-					"fields" : {
-						"raw" : {
-							"type" : "string",
-							"index" : "not_analyzed"
-						},
-						"lowercaseraw" : {
-							"type" : "string",
-							"analyzer" : "lowercase_keyword"
-						}
-					}
-				},
-				"Language" : {
-					"type" : "string",
-					"fields" : {
-						"lowercaseraw" : {
-							"type" : "string",
-							"analyzer" : "lowercase_keyword"
-						}
-					}
-				},
-				"Keywords" : {
+				"Q_chinese_t" : {
 					"type" : "string",
 					"analyzer" : "smartcn"
 				},
-				"Url" : {
+				"Q_english" : {
 					"type" : "string",
-					"fields" : {
-						"lowercaseraw" : {
-							"type" : "string",
-							"analyzer" : "lowercase_keyword"
-						}
-					}
+					"analyzer" : "english"
+				},
+				"A_chinese_s" : {
+					"type" : "string",
+					"analyzer" : "smartcn"
+				},
+				"A_chinese_t" : {
+					"type" : "string",
+					"analyzer" : "smartcn"
+				},
+				"A_english" : {
+					"type" : "string",
+					"analyzer" : "english"
+				},
+				"Type_chinese_s" : {
+					"type" : "string",
+					"analyzer" : "smartcn"
+				},
+				"Type_chinese_t" : {
+					"type" : "string",
+					"analyzer" : "smartcn"
+				},
+				"Type_english" : {
+					"type" : "string",
+					"analyzer" : "english"
+				},
+				"Language" : {
+					"type" : "string"
+				},
+				"Keyword_chinese_s" : {
+					"type" : "string",
+					"analyzer" : "smartcn"
+				},
+				"Keyword_chinese_t" : {
+					"type" : "string",
+					"analyzer" : "smartcn"
+				},
+				"Keyword_english" : {
+					"type" : "string",
+					"analyzer" : "english"
+				},
+				"Url" : {
+					"type" : "string"
 				},
 				"LastModified" : {
 					"type" : "date",

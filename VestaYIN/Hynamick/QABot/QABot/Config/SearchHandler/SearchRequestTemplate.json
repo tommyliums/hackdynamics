@@ -20,7 +20,7 @@
                   "multi_match": {
                     "query": "{{query_string}}",
                     "type": "cross_fields",
-                    "fields": [ "Q_chinese_s", "A_chinese_s", "Type", "Url", "Keyword" ],
+                    "fields": [ "Q_##field_suffix##^6", "A_##field_suffix##^2", "Type_##field_suffix##", "Url", "Keyword_##field_suffix##^4" ],
                     "minimum_should_match": "2<80% 4<70% 9<50%"
                   }
                 },
@@ -28,7 +28,7 @@
                 "should": [
                   {
                     "match": {
-                      "Q_chinese_s": {
+                      "Q_##field_suffix##": {
                         "query": "{{query_string}}",
                         "boost": 10
                       }
@@ -36,7 +36,7 @@
                   },
                   {
                     "match": {
-                      "A_chinese_s": {
+                      "A_##field_suffix##": {
                         "query": "{{query_string}}",
                         "boost": 3
                       }
@@ -44,7 +44,7 @@
                   },
                   {
                     "match_phrase": {
-                      "Q_chinese_s": {
+                      "Q_##field_suffix##": {
                         "query": "{{query_string}}",
                         "slop": 2,
                         "boost": 20
@@ -53,7 +53,7 @@
                   },
                   {
                     "match_phrase": {
-                      "A_chinese_s": {
+                      "A_##field_suffix##": {
                         "query": "{{query_string}}",
                         "slop": 3,
                         "boost": 5

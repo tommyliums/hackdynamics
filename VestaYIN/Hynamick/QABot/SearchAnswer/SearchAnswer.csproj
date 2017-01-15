@@ -7,9 +7,9 @@
     <ProjectGuid>{64EEE748-1EE3-43C9-A59A-9B2093B3033C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hynamick.SearchAnswer</RootNamespace>
-    <AssemblyName>Hynamick.SearchAnswer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Hynamick.Search.SearchAnswer</RootNamespace>
+    <AssemblyName>Hynamick.Search.SearchAnswer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISearchHandler.cs" />
     <Compile Include="JsonTransform.cs" />
     <Compile Include="JsonTransformAction.cs" />
     <Compile Include="JsonTransformTemplate.cs" />

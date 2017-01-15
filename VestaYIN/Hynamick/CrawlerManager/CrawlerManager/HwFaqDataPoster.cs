@@ -19,7 +19,7 @@ namespace CrawlerManager
         public static string UrlPattern = ConfigurationManager.AppSettings["Hw.Faq.UrlPattern"];
         public static string IndexName = ConfigurationManager.AppSettings["Hw.Faq.IndexName"].ToLowerInvariant();
 
-        private HttpCrawler crawler = new HttpCrawler();
+        private readonly HttpCrawler crawler = new HttpCrawler();
 
         public async Task<int> ProcessDataAsync(string dataFolder)
         {
@@ -33,13 +33,15 @@ namespace CrawlerManager
                 {
                     var jsonContent = JToken.Parse(File.ReadAllText(file));
                     var jObject = new JObject();
+                    var locale = jsonContent["languageName"];
+                    var localeSuffix = LocaleHelper.GetLocaleSuffix((string)locale);
                     var faqId = (int)jsonContent["faqId"];
                     jObject["FaqId"] = faqId;
-                    jObject["Q_chinese_s"] = jsonContent["title"];
-                    jObject["A_chinese_s"] = jsonContent["answer"];
-                    jObject["Type"] = jsonContent["faqType"];
-                    jObject["Language"] = jsonContent["languageName"];
-                    jObject["Keyword"] = MakeArray((string)jsonContent["keywords"]);
+                    jObject[$"Q_{localeSuffix}"] = jsonContent["title"];
+                    jObject[$"A_{localeSuffix}"] = jsonContent["answer"];
+                    jObject[$"Type_{localeSuffix}"] = jsonContent["faqType"];
+                    jObject[$"Keyword_{localeSuffix}"] = MakeArray((string)jsonContent["keywords"]);
+                    jObject["Language"] = locale;
                     jObject["LastModified"] = new DateTime(1970, 1, 1).AddMilliseconds((long)jsonContent["postDate"]);
                     jObject["Url"] = string.Format(UrlPattern, faqId);
                     builder.AppendFormat(
@@ -53,11 +55,17 @@ namespace CrawlerManager
                 }
                 if (docCount % 1000 != 0 && builder.Length <= 2 * 1000 * 1000) continue;
 
-                File.WriteAllText($"Data_{docCount}.json", builder.ToString(), Encoding.UTF8);
                 var requestItem = new RequestItem(putUrl, "PUT", builder.ToString());
                 var responseItem = await this.crawler.CrawlAsync(requestItem);
                 Trace.TraceInformation($"Put {docCount}: {responseItem}");
                 builder.Clear();
+            }
+
+            if (builder.Length > 0)
+            {
+                var requestItem = new RequestItem(putUrl, "PUT", builder.ToString());
+                var responseItem = await this.crawler.CrawlAsync(requestItem);
+                Trace.TraceInformation($"Put {docCount}: {responseItem}");
             }
 
             return docCount;

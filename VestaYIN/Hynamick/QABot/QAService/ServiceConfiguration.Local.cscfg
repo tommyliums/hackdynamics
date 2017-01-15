@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="QAService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="QARole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="SearchUrl" value="http://hynamick-es.chinacloudapp.cn:9200/{0}/docs/_search/template" />
+      <Setting name="LocaleMappingPath" value=".\Config\LocaleMapping.txt"/>
+      <Setting name="SearchTemplateFile" value=".\Config\SearchHandler\SearchRequestTemplate.json" />
+      <Setting name="TransformFilePath" value=".\Config\JsonTransform\SearchResponse.txt" />
+
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="vestayin" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBmgYJKoZIhvcNAQcDoIIBizCCAYcCAQAxggFLMIIBRwIBADAvMBsxGTAXBgNVBAMTEFVuaWZpZWRTZWFyY2hNRFMCEPcyllmUPXSgRkqQN5KlDNwwDQYJKoZIhvcNAQEBBQAEggEAdqHVPCW+1gK58OH35vj2BJZb3PF2AXGe930UrOnnIlvgRJxhMK5slrl5sEjIOJapyzQ9ebjnJ2tRkLsvhvi80Nq2k6zlAGZ8wNIroRTQI8gXpTsbYWSQH0+KgFgKvuluRLfPZ8VShKzlUVmHYdhsfLsqekxhRBkLKt0BebkC9+g83GUA0Z/CcfQlwIEsYy30KJccMcH6wBOs2lmXr+wNyh+ArjZ/onvxzWhl3Vr5Bgljx+B+BvnhkmbioJ7b9pBwORAmMpLH+qgBgM7qc+tTtKPmYDHFrxhUguDjm6rlCy6CqqkH+4S9XvQ9mcVULNNQ/z5NXVTP7Ks6dFmx9x2ICDAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECCVHuCXQg/ukgBBhECw+mbqIVqtcuTW+iE4t" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2018-07-01T23:59:59.0000000+00:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="53F6CA0B1B78C3D78163C7B531BEF526516F63C9" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

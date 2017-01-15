@@ -1,7 +1,7 @@
 ﻿@source{
   "Query": null,
   "TotalCount": #{
-        "Type": "SingleIntValue",
+        "Type": "SingleIntegerValue",
         "Select": "$.hits.total"
       },
   "ResultCount": -1,
@@ -44,15 +44,15 @@
     "Content": '{
       "Question": #{
         "Type": "SingleStringValue",
-        "Select": "$._source.Q_chinese_s"
+        "Select": "$._source.Q_##field_suffix##"
       },
       "Answer": #{
         "Type": "SingleStringValue",
-        "Select": "$._source.A_chinese_s"
+        "Select": "$._source.A_##field_suffix##"
       },
       "Type": #{
         "Type": "SingleStringValue",
-        "Select": "$._source.Type"
+        "Select": "$._source.Type_##field_suffix##"
       },
       "Url": #{
         "Type": "SingleStringValue",

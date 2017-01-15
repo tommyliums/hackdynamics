@@ -20,10 +20,14 @@ namespace CrawlerManager
 
         private static void HwFaqPostData()
         {
-            const string dataFolder = @"D:\Git\zh_cn";
+            const string dataFolder = @"D:\Code";
             var poster = new HwFaqDataPoster();
-            var docCount = poster.ProcessDataAsync(dataFolder).Result;
-            Console.WriteLine(docCount);
+            var folders = Directory.EnumerateDirectories(dataFolder);
+            foreach (var folder in folders)
+            {
+                var docCount = poster.ProcessDataAsync(folder).Result;
+                Console.WriteLine(docCount);
+            }
         }
 
         private static void HwFaqCrawl()

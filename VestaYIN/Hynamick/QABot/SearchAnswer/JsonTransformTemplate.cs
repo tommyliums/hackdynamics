@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="JsonTemplate.cs" company="Microsoft">
-//   Copyright (c) Microsoft Corporation.  All rights reserved.
+// <copyright file="JsonTransformTemplate.cs" company="Microsoft">
+//     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 // <summary>
-//   Defines the JsonTemplate type.
+//     Defines the JsonTransformTemplate.cs type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Hynamick.SearchAnswer
+namespace Hynamick.Search.SearchAnswer
 {
     /// <summary>
-    /// Store Json template data
+    /// Store JSON template data
     /// </summary>
     public class JsonTransformTemplate
     {

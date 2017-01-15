@@ -1,0 +1,3 @@
+﻿ZH_CN	chinese_s
+TR_CN	chinese_t
+EN	english

@@ -20,7 +20,7 @@ namespace Hynamick.QaBot
     public class MessagesController : ApiController
     {
         /// <summary>
-        /// POST: api/Messages
+        /// POST: API/Messages
         /// Receive a message from a user and reply to it
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
@@ -39,7 +39,7 @@ namespace Hynamick.QaBot
                     query = actions[query];
                 }
 
-                var searchResponse = await QaDialog.Handler.SearchAsync(query, QaDialog.DefaultAnswerCount);
+                var searchResponse = await QaDialog.Handler.SearchAsync("HW", "zh-cn", query, QaDialog.DefaultAnswerCount);
                 var responseText = QaDialog.BuildText(query, searchResponse, out actions);
 
                 userData.SetProperty<IDictionary<string, string>>("RelatedQuestions", actions);
