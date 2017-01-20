@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainModels\Answer.cs" />
+    <Compile Include="DomainModels\AnswerCollection.cs" />
     <Compile Include="DomainModels\Question.cs" />
     <Compile Include="Interfaces\IAnswerFormatter.cs" />
     <Compile Include="Interfaces\IQnAProvider.cs" />

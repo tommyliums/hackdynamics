@@ -1,6 +1,6 @@
 ﻿namespace Hynamick.QnA.Infrastructure.QnAMaker.Models
 {
-    public class QnAMakerAnswer
+    public class QnAMakerResponse
     {
         public string Answer
         {

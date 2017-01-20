@@ -1,6 +1,8 @@
-﻿namespace Hynamick.QnA.Core.DomainModels
+﻿using System;
+
+namespace Hynamick.QnA.Infrastructure.ElasticSearch.Models
 {
-    public class Answer
+    public class ElasticSearchResult
     {
         public string Question
         {
@@ -8,7 +10,7 @@
             set;
         }
 
-        public string AnswerText
+        public string Answer
         {
             get;
             set;
@@ -21,6 +23,18 @@
         }
 
         public string Url
+        {
+            get;
+            set;
+        }
+
+        public DateTime LastModified
+        {
+            get;
+            set;
+        }
+
+        public object Metas
         {
             get;
             set;

@@ -19,31 +19,47 @@ namespace Hynamick.QnA.Infrastructure.QnAMaker
 
         public Answer Answer(Question question)
         {
-            QnAMakerQuestion qnaQuestion = new QnAMakerQuestion()
+            QnAMakerRequest request = new QnAMakerRequest()
             {
-                Question = question.Text
+                Question = question.Text,
+                ApiUrl = this.envInfo.ApiUrl,
+                Method = HttpPostMethod,
+                ContentType = ApplicationJsonContentType,
+                Encoding = this.envInfo.Encoding,
+                OcpApimSubscriptionKey = this.envInfo.OcpApimSubscriptionKey
             };
 
-            QnAMakerAnswer qnaAnswer = this.DoGetAnswer(qnaQuestion);
+            QnAMakerResponse response = this.DoGetAnswer(request);
 
             return new Answer()
             {
-                Text = qnaAnswer.Answer,
-                Relevance = qnaAnswer.Score
+                Text = response.Answer,
+                Relevance = response.Score
             };
         }
 
-        private QnAMakerAnswer DoGetAnswer(QnAMakerQuestion question)
+        private QnAMakerResponse DoGetAnswer(QnAMakerRequest request)
         {
-            HttpWebRequest request = this.CreateRequest(question);
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create();
+            webRequest.Method = HttpPostMethod;
+            webRequest.ContentType = ApplicationJsonContentType;
+            webRequest.Headers.Add(OcpApimSubscriptionKeyHeaderName, this.envInfo.OcpApimSubscriptionKey);
+
+            string data = JsonConvert.SerializeObject(question);
+            byte[] dataBytes = Encoding.GetEncoding(this.envInfo.Encoding).GetBytes(data);
+            webRequest.ContentLength = dataBytes.Length;
+            using (Stream stream = webRequest.GetRequestStream())
+            {
+                stream.Write(dataBytes, 0, dataBytes.Length);
+            }
 
             try
             {
-                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                using (HttpWebResponse webResponse = webRequest.GetResponse() as HttpWebResponse)
                 {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
                     {
-                        return JsonConvert.DeserializeObject<QnAMakerAnswer>(reader.ReadToEnd());
+                        return JsonConvert.DeserializeObject<QnAMakerResponse>(reader.ReadToEnd());
                     }
                 }
             }
@@ -58,24 +74,6 @@ namespace Hynamick.QnA.Infrastructure.QnAMaker
                     "Failed to get answer from QnAMaker api.",
                     ex);
             }
-        }
-
-        private HttpWebRequest CreateRequest(QnAMakerQuestion question)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.envInfo.ApiUrl);
-            request.Method = HttpPostMethod;
-            request.ContentType = ApplicationJsonContentType;
-            request.Headers.Add(OcpApimSubscriptionKeyHeaderName, this.envInfo.OcpApimSubscriptionKey);
-
-            string data = JsonConvert.SerializeObject(question);
-            byte[] dataBytes = Encoding.GetEncoding(this.envInfo.Encoding).GetBytes(data);
-            request.ContentLength = dataBytes.Length;
-            using (Stream stream = request.GetRequestStream())
-            {
-                stream.Write(dataBytes, 0, dataBytes.Length);
-            }
-
-            return request;
         }
 
         private QnAMakerEnvInfo envInfo = null;
