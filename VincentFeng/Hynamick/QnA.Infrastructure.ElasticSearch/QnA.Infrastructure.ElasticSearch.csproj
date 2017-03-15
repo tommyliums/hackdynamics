@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{445A886F-3696-4CB5-8328-041DC3DAD842}</ProjectGuid>
+    <ProjectGuid>{70E527DC-236B-483A-9D30-A3F1A6224B58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hynamick.QnA.Infrastructure.QnAMaker</RootNamespace>
-    <AssemblyName>Hynamick.QnA.Infrastructure.QnAMaker</AssemblyName>
+    <RootNamespace>Hynamick.QnA.Infrastructure.ElasticSearch</RootNamespace>
+    <AssemblyName>Hynamick.QnA.Infrastructure.ElasticSearch</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,11 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\QnAMakerApiException.cs" />
-    <Compile Include="Models\QnAMakerEnvInfo.cs" />
-    <Compile Include="Models\QnAMakerRequest.cs" />
-    <Compile Include="Models\QnAMakerResponse.cs" />
-    <Compile Include="QnAProviderQnAMakerImpl.cs" />
+    <Compile Include="Exceptions\ElasticSearchException.cs" />
+    <Compile Include="Models\ElasticSearchEnvInfo.cs" />
+    <Compile Include="Models\ElasticSearchError.cs" />
+    <Compile Include="Models\ElasticSearchResponse.cs" />
+    <Compile Include="Models\ElasticSearchResult.cs" />
+    <Compile Include="QnAProviderElasticSearchImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

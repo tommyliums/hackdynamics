@@ -4,6 +4,6 @@ namespace Hynamick.QnA.Core.Interfaces
 {
     public interface IQnAProvider
     {
-        Answer Answer(Question question);
+        AnswerCollection Answer(Question question);
     }
 }

@@ -1,13 +1,13 @@
 ﻿using Hynamick.QnA.Core.DomainModels;
 using Hynamick.QnA.Core.Interfaces;
-using Hynamick.QnA.Infrastructure.AnswerFormatters;
-using Hynamick.QnA.Infrastructure.QnAMaker;
-using Hynamick.QnA.Infrastructure.QnAMaker.Models;
+using Hynamick.QnA.Infrastructure.ElasticSearch;
+using Hynamick.QnA.Infrastructure.ElasticSearch.Models;
 using Microsoft.Bot.Connector;
 using System;
-using System.Configuration;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -25,14 +25,13 @@ namespace Hynamick.QnA.Bot.Controllers
 
         public QnAController()
         {
-            QnAMakerEnvInfo qnaMakerEnvInfo = new QnAMakerEnvInfo()
+            ElasticSearchEnvInfo envInfo = new ElasticSearchEnvInfo()
             {
-                ApiUrl = ConfigurationManager.AppSettings["QnAMakerApiUrl"],
-                OcpApimSubscriptionKey = ConfigurationManager.AppSettings["QnAMakerOcpApimSubscriptionKey"],
-                Encoding = ConfigurationManager.AppSettings["QnAMakerEncoding"]
+                SearchUrl = "http://hynamick-qa.chinacloudapp.cn/api/search",
+                SearchSource = "hwfaq"
             };
 
-            this.qnaProvider = new QnAProviderQnAMakerImpl(qnaMakerEnvInfo);
+            this.qnaProvider = new QnAProviderElasticSearchImpl(envInfo);
             this.answerFormatter = new SimpleAnswerFormatter();
         }
 
@@ -59,13 +58,15 @@ namespace Hynamick.QnA.Bot.Controllers
             {
                 Question question = new Question()
                 {
-                    Text = activity.Text
+                    QuestionText = activity.Text,
+                    ResultCount = 3,
+                    Locale = "en-us"
                 };
-                Answer answer = this.qnaProvider.Answer(question);
+                AnswerCollection answers = this.qnaProvider.Answer(question);
 
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
-                Activity reply = activity.CreateReply(this.answerFormatter.Format(answer));
+                Activity reply = activity.CreateReply(this.answerFormatter.Format(answers));
                 await connector.Conversations.ReplyToActivityAsync(reply);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
@@ -78,5 +79,29 @@ namespace Hynamick.QnA.Bot.Controllers
 
         private IQnAProvider qnaProvider = null;
         private IAnswerFormatter answerFormatter = null;
+
+        private class SimpleAnswerFormatter : IAnswerFormatter
+        {
+            public string Format(AnswerCollection answers)
+            {
+                StringBuilder result = new StringBuilder();
+
+                result.AppendLine($"Total answer count: {answers.TotalCount}");
+                result.AppendLine($"Result answer count: {answers.ResultCount}");
+                result.AppendLine("Answers:");
+
+                for (int ix = 0; ix < answers.Answers.Count(); ix++)
+                {
+                    Answer answer = answers.Answers.ElementAt(ix);
+                    result.AppendLine($"  Answer {ix}");
+                    result.AppendLine($"    Question: {answer.Question}");
+                    result.AppendLine($"    Answer: {answer.AnswerText}");
+                    result.AppendLine($"    Type: {answer.Type}");
+                    result.AppendLine($"    Reference: {answer.Url}");
+                }
+
+                return result.ToString();
+            }
+        }
     }
 }
